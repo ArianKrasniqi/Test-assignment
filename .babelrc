@@ -25,7 +25,8 @@
                 "decoratorsBeforeExport": true
             }
         ],
-        "@babel/plugin-transform-runtime"
+        "@babel/plugin-transform-runtime",
+        "babel-plugin-styled-components"
     ],
     "env": {
         "test": {
