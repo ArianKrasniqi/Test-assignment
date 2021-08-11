@@ -9,7 +9,7 @@ export const TableContainer = styled.div`
 export const TableHeader = styled.div`
   background: #f6f9fc;
   height: 70px;
-  border-bottom: 1px solid #d4dfe4;
+  border-bottom: 2px solid #d4dfe480;
   display: flex;
   align-items: center;
   padding: 0px 30px;
