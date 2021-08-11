@@ -13,8 +13,6 @@ import SVGinsurtech from "../../assets/Icons/ico_insurtech.svg";
 import SVGiot from "../../assets/Icons/ico_iot.svg";
 import SVGroboadvisory from "../../assets/Icons/ico_roboadvisory.svg";
 
-import data from "./data.js";
-
 const sectors = [
   {
     type: "Fintech",
@@ -45,6 +43,8 @@ const LandingPage = () => {
 
   const dataReorder = companyData?.companies?.map((company) => {
     const pickData = (({ name, stage, sector, investmentSize }) => ({ name, investmentSize, sector, stage }))(company);
+    pickData.commodity = pickData.name;
+    pickData.total = pickData.investmentSize;
     return pickData;
   })
 
@@ -59,7 +59,7 @@ const LandingPage = () => {
       </Table>
       <Table title="Companies by Investment Size">
         <InnerTable>
-          <Doughnut data={data} titleInside={"COMPANIES"} />
+          <Doughnut data={dataReorder} titleInside={"COMPANIES"} />
         </InnerTable>
       </Table>
       <GridTable tableHead={tableHead} data={dataReorder}/>
