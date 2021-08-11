@@ -1,7 +1,18 @@
 import React from "react";
-import { GridTableContainer, GridTableHeader, GridTableBody } from "./styles";
+import { withRouter } from "react-router";
+import {
+  GridTableContainer,
+  GridTableHeader,
+  GridTableBody,
+  GridTableFooter,
+  AddButton,
+} from "./styles";
 
-const GridTable = ({ data, tableHead }) => {
+const GridTable = ({ data, tableHead, history }) => {
+  const handleAddCompany = () => {
+    history.push("/company/add");
+  };
+
   return (
     <GridTableContainer>
       <GridTableHeader>
@@ -26,8 +37,13 @@ const GridTable = ({ data, tableHead }) => {
           </tr>
         ))}
       </GridTableBody>
+      <GridTableFooter>
+        <td colspan="4">
+          <AddButton onClick={handleAddCompany}>Add new Company</AddButton>
+        </td>
+      </GridTableFooter>
     </GridTableContainer>
   );
 };
 
-export default GridTable;
+export default withRouter(GridTable);
