@@ -12,7 +12,7 @@ const CenterTemplate = ({ data, title }) => {
         style={{ fontSize: 18, fill: "#494949" }}
       >
         <tspan x="100" style={{ fontWeight: 800, fontSize: "40px" }}>
-          {data.length}
+          {data?.length}
         </tspan>
         <tspan x="100" dy="20px">
           {title}
