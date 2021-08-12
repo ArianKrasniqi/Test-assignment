@@ -11,6 +11,9 @@ import FormControl from "@material-ui/core/FormControl";
 import styled from "styled-components";
 import InputBase from "@material-ui/core/InputBase";
 
+import { ADD_COMPANY } from "../../../Page.queries";
+import { useMutation } from '@apollo/client';
+
 export const AddCompanyForm = styled.div`
   margin: 20px 100px;
   width: 500px;
@@ -60,9 +63,11 @@ export const Submit = styled.button`
   height: 50px;
   color: white;
   background-color: #0f7380;
+  background-color: ${props => props.allowSubmit ? "#0f7380" : "#a8aaab90"};
   margin-left: 50%;
   transform: translateX(-50%);
   margin-top: 20px;
+  cursor: ${props => props.allowSubmit ? "pointer" : "not-allowed"};
 `;
 
 const useStyles = makeStyles((theme) => ({
@@ -106,12 +111,33 @@ const BootstrapInput = withStyles((theme) => ({
 
 const AddCompany = ({ history }) => {
   const classes = useStyles();
+  const [allowSubmit, setAllowSubmit] = useState(true)
   const [inputs, setInputs] = useState({
     company: '',
     stage: 'Idea',
     sector: 'Fintech',
     amount: 0
   });
+
+  const [addCompanyFunction, { data, loading, error }] = useMutation(ADD_COMPANY);
+  
+  const handleSubmit = () => {
+    let data = inputs;
+    data.name = inputs.company;
+    data.investmentSize = parseInt(inputs.amount || 0);
+    delete data.company;
+    delete data.amount;
+    addCompanyFunction({ variables: { ...data } })
+    window.location.href = "/"
+  }
+  
+  useEffect(() => {
+    let filled = true;
+    for (const property in inputs) {
+      if(!inputs[property]) filled = false;
+    }
+    setAllowSubmit(filled);
+  }, [inputs]);
 
   const handleClose = () => {
     history.push("/");
@@ -160,7 +186,7 @@ const AddCompany = ({ history }) => {
             >
               <option aria-label="None" value="" />
               {stages.map((stage) => (
-                <option value={stage}>{stage}</option>
+                <option key={stage} value={stage}>{stage}</option>
               ))}
             </NativeSelect>
           </FormControl>
@@ -181,7 +207,7 @@ const AddCompany = ({ history }) => {
             >
               <option aria-label="None" value="" />
               {sectorsData.map((sector) => (
-                <option value={sector.type}>{sector.type}</option>
+                <option key={sector.type} value={sector.type}>{sector.type}</option>
               ))}
             </NativeSelect>
           </FormControl>
@@ -200,7 +226,7 @@ const AddCompany = ({ history }) => {
             </div>
           </LabeledInput>
 
-          <Submit>Add new company</Submit>
+          <Submit onClick={handleSubmit} allowSubmit={allowSubmit}>Add new company</Submit>
         </AddCompanyForm>
       </Modal>
     </Backdrop>
