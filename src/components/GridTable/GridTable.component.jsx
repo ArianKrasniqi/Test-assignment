@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { withRouter } from "react-router";
 import {
   GridTableContainer,
@@ -47,5 +48,11 @@ const GridTable = ({ data, tableHead, history }) => {
     </GridTableContainer>
   );
 };
+
+GridTable.propTypes = {
+  data: PropTypes.array.isRequired,
+  tableHead: PropTypes.array.isRequired,
+  history: PropTypes.object,
+}
 
 export default withRouter(GridTable);

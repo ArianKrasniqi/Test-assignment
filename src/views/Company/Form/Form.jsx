@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { sectorsData, stages } from "data/data";
 
 import { makeStyles, withStyles } from "@material-ui/core/styles";
@@ -187,5 +188,12 @@ const Form = ({ handleInputChange, handleSubmit, inputs, allowSubmit }) => {
     </AddCompanyForm>
   );
 };
+
+Form.propTypes = {
+  handleInputChange: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  inputs: PropTypes.any,
+  allowSubmit: PropTypes.bool,
+}
 
 export default Form;

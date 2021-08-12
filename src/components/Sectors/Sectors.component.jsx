@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from 'prop-types'
 import { SectorsContainer, Sector } from "./styles";
 
 const Sectors = ({ sectors }) => {
@@ -15,5 +15,9 @@ const Sectors = ({ sectors }) => {
     </SectorsContainer>
   );
 };
+
+Sectors.propTypes = {
+  sectors: PropTypes.element
+}
 
 export default Sectors;
