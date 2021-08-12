@@ -28,6 +28,6 @@ export const sectorsData = [
   },
 ];
 
-export const stages = ["Idea", "Prototype", "Series A"];
+export const stages = ['Idea', 'Prototype', 'Seed', 'Series A', 'Series B', 'Series C'];
 
 export const tableHead = ["Company Name", "Stage", "Sector", "Investment Size"];

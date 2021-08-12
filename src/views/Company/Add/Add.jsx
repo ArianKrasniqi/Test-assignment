@@ -20,7 +20,7 @@ const AddCompany = ({ history }) => {
     useMutation(ADD_COMPANY);
 
   // useEffect(() => {
-  //   We can send added data in redux and rerender to show in list
+  //   We can send added data in redux and rerender to show in list, but we are updating cache in out case
   //   console.log('addedData', addedData)
   // }, [addedData])
 
@@ -34,15 +34,15 @@ const AddCompany = ({ history }) => {
       variables: { ...data },
       update: (cache) => {
         const existingCompanies = cache.readQuery({ query: GET_COMPANIES });
-        const newCompanies = [...existingCompanies.companies]
-        newCompanies.push({...data, id: new Date().getUTCMilliseconds()});
+        const newCompanies = [...existingCompanies.companies];
+        newCompanies.push({ ...data, id: new Date().getUTCMilliseconds() });
         cache.writeQuery({
           query: GET_COMPANIES,
           data: { companies: newCompanies },
         });
       },
     });
-    history.push('/')
+    history.push("/");
   };
 
   useEffect(() => {

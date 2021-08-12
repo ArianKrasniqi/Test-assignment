@@ -57,11 +57,11 @@ export const Submit = styled.button`
   height: 50px;
   color: white;
   background-color: #0f7380;
-  background-color: ${props => props.allowSubmit ? "#0f7380" : "#a8aaab90"};
+  background-color: ${(props) => (props.allowSubmit ? "#0f7380" : "#a8aaab90")};
   margin-left: 50%;
   transform: translateX(-50%);
   margin-top: 20px;
-  cursor: ${props => props.allowSubmit ? "pointer" : "not-allowed"};
+  cursor: ${(props) => (props.allowSubmit ? "pointer" : "not-allowed")};
 `;
 
 const useStyles = makeStyles((theme) => ({
@@ -107,78 +107,84 @@ const Form = ({ handleInputChange, handleSubmit, inputs, allowSubmit }) => {
   const classes = useStyles();
 
   return (
-        <AddCompanyForm>
-          <Title>ADD NEW COMPANY</Title>
+    <AddCompanyForm>
+      <Title>ADD NEW COMPANY</Title>
 
-          <LabeledInput>
-            <Label htmlFor="company">Company Name</Label>
-            <Input
-              type="text"
-              id="company"
-              name="company"
-              placeholder="Company Name"
-              onChange={handleInputChange}
-            />
-          </LabeledInput>
+      <LabeledInput>
+        <Label htmlFor="company">Company Name</Label>
+        <Input
+          type="text"
+          id="company"
+          name="company"
+          placeholder="Company Name"
+          onChange={handleInputChange}
+        />
+      </LabeledInput>
 
-          <FormControl className={classes.select}>
-            <InputLabel
-              className={classes.inputLabel}
-              htmlFor="demo-customized-select-native"
-            >
-              Stage
-            </InputLabel>
-            <NativeSelect
-              id="demo-customized-select-native"
-              value={inputs.stage}
-              name="stage"
-              onChange={handleInputChange}
-              input={<BootstrapInput />}
-            >
-              <option aria-label="None" value="" />
-              {stages.map((stage) => (
-                <option key={stage} value={stage}>{stage}</option>
-              ))}
-            </NativeSelect>
-          </FormControl>
+      <FormControl className={classes.select}>
+        <InputLabel
+          className={classes.inputLabel}
+          htmlFor="demo-customized-select-native"
+        >
+          Stage
+        </InputLabel>
+        <NativeSelect
+          id="demo-customized-select-native"
+          value={inputs.stage}
+          name="stage"
+          onChange={handleInputChange}
+          input={<BootstrapInput />}
+        >
+          <option aria-label="None" value="" />
+          {stages.map((stage) => (
+            <option key={stage} value={stage}>
+              {stage}
+            </option>
+          ))}
+        </NativeSelect>
+      </FormControl>
 
-          <FormControl className={classes.select}>
-            <InputLabel
-              className={classes.inputLabel}
-              htmlFor="demo-customized-select-native"
-            >
-              Sector
-            </InputLabel>
-            <NativeSelect
-              id="demo-customized-select-native"
-              value={inputs.sector}
-              name="sector"
-              onChange={handleInputChange}
-              input={<BootstrapInput />}
-            >
-              <option aria-label="None" value="" />
-              {sectorsData.map((sector) => (
-                <option key={sector.type} value={sector.type}>{sector.type}</option>
-              ))}
-            </NativeSelect>
-          </FormControl>
+      <FormControl className={classes.select}>
+        <InputLabel
+          className={classes.inputLabel}
+          htmlFor="demo-customized-select-native"
+        >
+          Sector
+        </InputLabel>
+        <NativeSelect
+          id="demo-customized-select-native"
+          value={inputs.sector}
+          name="sector"
+          onChange={handleInputChange}
+          input={<BootstrapInput />}
+        >
+          <option aria-label="None" value="" />
+          {sectorsData.map((sector) => (
+            <option key={sector.type} value={sector.type}>
+              {sector.type}
+            </option>
+          ))}
+        </NativeSelect>
+      </FormControl>
 
-          <LabeledInput>
-            <Label htmlFor="amount">Investment size</Label>
-            <div style={{ position: "relative" }}>
-              <Input
-                type="number"
-                id="amount"
-                name="amount"
-                placeholder="Enter amount"
-                onChange={handleInputChange}
-              />
-              <LabelInside>EUR</LabelInside>
-            </div>
-          </LabeledInput>
+      <LabeledInput>
+        <Label htmlFor="amount">Investment size</Label>
+        <div style={{ position: "relative" }}>
+          <Input
+            type="number"
+            id="amount"
+            name="amount"
+            placeholder="Enter amount"
+            onChange={handleInputChange}
+          />
+          <LabelInside>EUR</LabelInside>
+        </div>
+      </LabeledInput>
 
-          <Submit onClick={handleSubmit} allowSubmit={allowSubmit}>Add new company</Submit>
-        </AddCompanyForm>
+      <Submit onClick={handleSubmit} allowSubmit={allowSubmit}>
+        Add new company
+      </Submit>
+    </AddCompanyForm>
   );
 };
 

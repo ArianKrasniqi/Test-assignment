@@ -18,24 +18,31 @@ const LandingPage = () => {
   useEffect(() => {
     const companiesData = reorderDataFunc();
     setCompaniesData(companiesData);
-  }, [companyData])
+  }, [companyData]);
 
   const reorderDataFunc = () => {
     return companyData?.companies?.map((company) => {
       let newSectors = [...sectors];
-      let sectorIndex = newSectors.findIndex((sector) => sector.type == company.sector);
-      if(newSectors[sectorIndex]) {
+      let sectorIndex = newSectors.findIndex(
+        (sector) => sector.type == company.sector
+      );
+      if (newSectors[sectorIndex]) {
         newSectors[sectorIndex].value += 1;
       }
       // can be use something like cloneDeep from lodash for correct implementation here
       setSectors(newSectors);
 
-      const pickData = (({ name, stage, sector, investmentSize }) => ({ name, investmentSize, sector, stage }))(company);
+      const pickData = (({ name, stage, sector, investmentSize }) => ({
+        name,
+        investmentSize,
+        sector,
+        stage,
+      }))(company);
       pickData.commodity = pickData.name;
       pickData.total = pickData.investmentSize;
       return pickData;
-    })
-  }
+    });
+  };
 
   const InnerTable = styled.div`
     padding: 40px;
@@ -51,7 +58,7 @@ const LandingPage = () => {
           <Doughnut data={companiesData} titleInside={"COMPANIES"} />
         </InnerTable>
       </Table>
-      <GridTable tableHead={tableHead} data={companiesData}/>
+      <GridTable tableHead={tableHead} data={companiesData} />
     </div>
   );
 };
