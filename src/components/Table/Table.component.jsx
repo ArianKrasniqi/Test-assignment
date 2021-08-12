@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types'
 import { TableContainer, TableHeader, TableBody } from "./styles";
 
 const Table = ({ children, title }) => {
@@ -11,5 +12,10 @@ const Table = ({ children, title }) => {
     </TableContainer>
   );
 };
+
+Table.propTypes = {
+  children: PropTypes.element,
+  title: PropTypes.node,
+}
 
 export default Table;

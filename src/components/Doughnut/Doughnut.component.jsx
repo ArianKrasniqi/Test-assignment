@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import PieChart, { Legend, Series } from "devextreme-react/pie-chart";
 
 const CenterTemplate = ({ data, title }) => {
@@ -22,6 +23,19 @@ const CenterTemplate = ({ data, title }) => {
   );
 };
 
+const getScreenSize = () => {
+  const { innerWidth } = window;
+  let breakpoint = 'xs';
+  
+  if (innerWidth <= 768) {
+    breakpoint = 'md';
+  }
+  else if (innerWidth < 600) {
+    breakpoint = 'sm';
+  }
+  return breakpoint;
+};
+
 const Doughnut = ({ data, titleInside }) => {
   return (
     <div className="pies-container" style={{ marginRight: "150px" }}>
@@ -35,16 +49,26 @@ const Doughnut = ({ data, titleInside }) => {
       >
         <Series argumentField="commodity" valueField="total"></Series>
         <Legend
-          margin={100}
+          margin={getScreenSize === 'md' ? 0 : 100}
           horizontalAlignment="right"
           verticalAlignment="top"
           columnCount={2}
-          columnItemSpacing={100}
-          rowItemSpacing={25}
+          columnItemSpacing={getScreenSize === 'md' ? 10 : 100}
+          rowItemSpacing={getScreenSize === 'md' ? 10 : 25}
         />
       </PieChart>
     </div>
   );
 };
+
+Doughnut.propTypes = {
+  data: PropTypes.array.isRequired,
+  titleInside: PropTypes.node,
+}
+
+CenterTemplate.propTypes = {
+  data: PropTypes.array,
+  title: PropTypes.node,
+}
 
 export default Doughnut;
