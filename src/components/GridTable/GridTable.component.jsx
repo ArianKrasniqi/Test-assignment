@@ -38,9 +38,11 @@ const GridTable = ({ data, tableHead, history }) => {
         ))}
       </GridTableBody>
       <GridTableFooter>
-        <td colspan="4">
-          <AddButton onClick={handleAddCompany}>Add new Company</AddButton>
-        </td>
+        <tr>
+          <td colSpan="4">
+            <AddButton onClick={handleAddCompany}>Add new Company</AddButton>
+          </td>
+        </tr>
       </GridTableFooter>
     </GridTableContainer>
   );

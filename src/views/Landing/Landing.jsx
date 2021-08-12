@@ -7,13 +7,13 @@ import Sectors from "components/Sectors/Sectors.component";
 
 import { GET_COMPANIES } from "../../Page.queries";
 import { useQuery } from "@apollo/client";
-import { sectorsData, tableHead } from "./data";
+import { sectorsData, tableHead } from "../../data/data";
 
 const LandingPage = () => {
   const { loading, error, data: companyData } = useQuery(GET_COMPANIES);
 
   const [sectors, setSectors] = useState(sectorsData);
-  const [companiesData, setCompaniesData] = useState([]);
+  const [companiesData, setCompaniesData] = useState(null);
 
   useEffect(() => {
     const companiesData = reorderDataFunc();
@@ -24,7 +24,9 @@ const LandingPage = () => {
     return companyData?.companies?.map((company) => {
       let newSectors = [...sectors];
       let sectorIndex = newSectors.findIndex((sector) => sector.type == company.sector);
-      newSectors[sectorIndex].value += 1;
+      if(newSectors[sectorIndex]) {
+        newSectors[sectorIndex].value += 1;
+      }
       // can be use something like cloneDeep from lodash for correct implementation here
       setSectors(newSectors);
 
